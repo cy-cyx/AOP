@@ -11,7 +11,11 @@
 
 *com.example.apt_process.javaPoetText.class*
 
-3、代码是一个自动生成工厂模式的例子（apt的使用例子）
+3、一个自动生成工厂模式的例子（apt的使用例子）
+
+4、一个打印类信息的例子 
+
+*LogProcessor*
 
 参考资料：
 
@@ -19,3 +23,10 @@
 
 [https://blog.csdn.net/xx326664162/article/details/68490059]()
 
+*PackageElement* 表示一个包程序元素。提供对有关包及其成员的信息的访问。
+
+*ExecutableElement*  表示某个类或接口的方法、构造方法或初始化程序（静态或实例），包括注释类型元素。
+
+*TypeElement*  表示一个类或接口程序元素。提供对有关类型及其成员的信息的访问。注意，枚举类型是一种类，而注解类型是一种接口。
+
+*VariableElement*  表示一个字段、enum 常量、方法或构造方法参数、局部变量或异常参数。
