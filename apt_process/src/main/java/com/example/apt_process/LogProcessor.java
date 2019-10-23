@@ -46,7 +46,9 @@ public class LogProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
+        mMessager.printMessage(Diagnostic.Kind.NOTE, "print class");
         for (Element element : roundEnvironment.getElementsAnnotatedWith(Log.class)) {
+            mMessager.printMessage(Diagnostic.Kind.NOTE,"into for");
             if (element instanceof TypeElement) {
                 logClass((TypeElement) element);
             } else if (element instanceof ExecutableElement) {

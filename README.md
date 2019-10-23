@@ -13,6 +13,8 @@
 
 3、一个自动生成工厂模式的例子（apt的使用例子）
 
+*ColorFactory*
+
 4、一个打印类信息的例子 
 
 *LogProcessor*
