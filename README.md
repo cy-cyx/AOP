@@ -19,6 +19,10 @@
 
 *LogProcessor*
 
+5、一个类似黄油刀的例子
+
+*ViewProcessor*
+
 参考资料：
 
 [https://blog.csdn.net/qq_20521573/article/details/82321755]()
