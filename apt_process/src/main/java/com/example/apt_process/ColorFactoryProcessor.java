@@ -27,7 +27,7 @@ import javax.tools.Diagnostic;
  * create by cy
  * time : 2019/10/15
  * version : 1.0
- * Features :
+ * Features : apt实现工厂模式自动生成
  */
 @AutoService(Processor.class)
 public class ColorFactoryProcessor extends AbstractProcessor {
@@ -85,6 +85,7 @@ public class ColorFactoryProcessor extends AbstractProcessor {
 
         mMessager.printMessage(Diagnostic.Kind.NOTE, javaFile.toString());
 
+
         try {
             javaFile.writeTo(processingEnv.getFiler());
         } catch (IOException e) {
@@ -98,8 +99,8 @@ public class ColorFactoryProcessor extends AbstractProcessor {
         return SourceVersion.RELEASE_7;
     }
 
-    class Item {
-        public String clazz;
-        public String id;
+    private class Item {
+        String clazz;
+        String id;
     }
 }
