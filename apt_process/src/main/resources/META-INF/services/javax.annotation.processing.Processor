@@ -1,0 +1,3 @@
+com.example.apt_process.ColorFactoryProcessor
+com.example.apt_process.LogProcessor
+com.example.apt_process.ViewProcessor
