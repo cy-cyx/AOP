@@ -7,7 +7,7 @@
 
 `https\://services.gradle.org/distributions/gradle-4.10.1-all.zip 以下`
 
-这个问题已经解决：https://www.jianshu.com/p/098a9573f2c0
+这个问题已经解决：[https://www.jianshu.com/p/098a9573f2c0]()
 
 主要是因为Gradle4.x 升级到Gradle5.x 的区别
 
