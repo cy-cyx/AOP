@@ -33,4 +33,5 @@ dependencies {
 
     implementation project(':apt_lib')
     annotationProcessor project(':apt_process')
+    implementation project(':spi_lib')
 }

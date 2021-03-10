@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Apt.iml" filepath="$PROJECT_DIR$/.idea/Apt.iml" />
       <module fileurl="file://$PROJECT_DIR$/Apt.iml" filepath="$PROJECT_DIR$/Apt.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/apt_lib/apt_lib.iml" filepath="$PROJECT_DIR$/apt_lib/apt_lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/apt_process/apt_process.iml" filepath="$PROJECT_DIR$/apt_process/apt_process.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spi_lib/spi_lib.iml" filepath="$PROJECT_DIR$/spi_lib/spi_lib.iml" />
     </modules>
   </component>
 </project>

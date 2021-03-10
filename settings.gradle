@@ -1,1 +1,1 @@
-include ':app', ':apt_process', ':apt_lib'
+include ':app', ':apt_process', ':apt_lib', ':spi_lib'

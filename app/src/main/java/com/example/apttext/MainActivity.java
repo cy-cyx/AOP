@@ -1,5 +1,6 @@
 package com.example.apttext;
 
+import android.com.spi_lib.SpiInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -10,6 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.apt_lib.BindView;
 import com.example.apt_lib.IColor;
+
+import java.util.Iterator;
+import java.util.ServiceLoader;
+import android.com.spi_lib.SpiInterface;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,5 +37,13 @@ public class MainActivity extends AppCompatActivity {
         IColor blue = colorFactory.getColor("blue");
         Log.d("xx", "测试工厂模式：" + blue.id());
         Toast.makeText(this, blue.id(), Toast.LENGTH_SHORT).show();
+
+        // spi
+        ServiceLoader<SpiInterface> loader = ServiceLoader.load(SpiInterface.class);
+        Iterator<SpiInterface> iterator = loader.iterator();
+        while (iterator.hasNext()){
+            SpiInterface next = iterator.next();
+            Log.d("xx", next.toSpiString());
+        }
     }
 }
