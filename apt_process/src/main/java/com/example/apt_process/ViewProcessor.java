@@ -35,7 +35,7 @@ import javax.tools.Diagnostic;
  * version : 1.0
  * Features :  实现类似黄油刀的东西
  */
-@AutoService(Processor.class)
+//@AutoService(Processor.class)
 public class ViewProcessor extends AbstractProcessor {
 
     private Messager mMessager;

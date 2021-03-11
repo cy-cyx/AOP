@@ -29,7 +29,7 @@ import javax.tools.Diagnostic;
  * version : 1.0
  * Features : apt实现工厂模式自动生成
  */
-@AutoService(Processor.class)
+//@AutoService(Processor.class)
 public class ColorFactoryProcessor extends AbstractProcessor {
 
     private Messager mMessager;

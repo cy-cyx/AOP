@@ -26,7 +26,7 @@ import javax.tools.Diagnostic;
  * version : 1.0
  * Features : 用于编译时打印类信息
  */
-@AutoService(Processor.class)
+//@AutoService(Processor.class)
 public class LogProcessor extends AbstractProcessor {
 
     private Messager mMessager;

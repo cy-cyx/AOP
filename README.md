@@ -11,6 +11,8 @@
 
 主要是因为Gradle4.x 升级到Gradle5.x 的区别
 
+AutoService 主要用于生成META-INF.services下的文件
+
 2、javaPoet例子
 
 *com.example.apt_process.javaPoetText.class*
