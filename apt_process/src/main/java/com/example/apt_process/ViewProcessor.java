@@ -33,7 +33,7 @@ import javax.tools.Diagnostic;
  * create by cy
  * time : 2019/10/23
  * version : 1.0
- * Features :  实现类似黄油刀的东西
+ * Features :  实现类似butterKnife
  */
 //@AutoService(Processor.class)
 public class ViewProcessor extends AbstractProcessor {
