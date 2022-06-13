@@ -7,6 +7,11 @@ dependencies {
     implementation localGroovy() //必须
     //如果要使用android的API，需要引用这个，实现Transform的时候会用到
     implementation 'com.android.tools.build:gradle:3.2.1'
+
+    //ASM相关
+    implementation 'org.ow2.asm:asm:9.2'
+    implementation 'org.ow2.asm:asm-util:7.0'
+    implementation 'org.ow2.asm:asm-commons:7.0'
 }
 
 repositories {

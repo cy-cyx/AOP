@@ -13,6 +13,6 @@ class CustomizePlugin implements Plugin<Project> {
         def appExtension = project.extensions.getByType(AppExtension)
         // 区别是工程还是依赖库种
 //        LibraryExtension libraryExtension = project.extensions.getByType(LibraryExtension)
-        appExtension.registerTransform(new AMSTransform())
+        appExtension.registerTransform(new ASMTransform())
     }
 }
