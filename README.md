@@ -1,3 +1,7 @@
+**该工程补充说明
+
+该工程包括了APT（运行时编译）、SPI（服务提供方接口）、Transform、ASM
+
 编写于20191012 
 
 1、Gradle的兼容性bug 参考
@@ -42,3 +46,15 @@ AutoService 主要用于生成META-INF.services下的文件
 *TypeElement*  表示一个类或接口程序元素。提供对有关类型及其成员的信息的访问。注意，枚举类型是一种类，而注解类型是一种接口。
 
 *VariableElement*  表示一个字段、enum 常量、方法或构造方法参数、局部变量或异常参数。
+
+6、Transform例子
+
+增量构建和构建缓存：增量是上次的基础上的差量；缓存是保存成zip的形式，当作不止是上次的编译的复用（一般是变化不大的）
+
+···
+
+···
+
+7、ASM [https://asm.ow2.io/]()
+
+生成ASM代码插入代码 工具类 ASM Bytecode Viewer，注意有个坑，会提示找不到tools.jar，解决方案就直接去javac目录下，对应的class文件操作

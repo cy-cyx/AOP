@@ -16,8 +16,13 @@ import com.android.utils.FileUtils;
 import com.android.utils.ILogger;
 
 import org.gradle.api.logging.Logging;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Opcodes;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
@@ -108,11 +113,30 @@ public class ASMTransform extends Transform {
                             case CHANGED: {
                                 File outFile = getOutFile(directoryFile, file, outputFile);
                                 outFile.delete();
+                                outFile.createNewFile();
 
+                                String name = file.getName();
                                 // 判断是否要操作字节码
+                                if (name.equals("MainActivity.class")) {
 
+                                    //对class文件进行读取与解析
+                                    ClassReader classReader = new ClassReader(FileUtil.getBytesByFile(file.getPath()));
+                                    //对class文件的写入
+                                    ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS);
+                                    //对class文件的写入
+                                    MainActivityVisitor mainActivityVisitor =
+                                        new MainActivityVisitor(Opcodes.ASM6, (ClassVisitor) classWriter);
+                                    //依次调用 ClassVisitor接口的各个方法
+                                    classReader.accept(mainActivityVisitor, ClassReader.EXPAND_FRAMES);
+                                    //toByteArray方法会将最终修改的字节码以 byte 数组形式返回。
+                                    byte[] bytes = classWriter.toByteArray();
 
-                                FileUtils.copyFile(file, outFile);
+                                    FileOutputStream outputStream = new FileOutputStream(outFile.getAbsolutePath());
+                                    outputStream.write(bytes);
+                                    outputStream.close();
+                                }else {
+                                    FileUtils.copyFile(file, outFile);
+                                }
                                 break;
                             }
                             case REMOVED: {
@@ -130,11 +154,35 @@ public class ASMTransform extends Transform {
                             File outFile = getOutFile(directoryFile, file, outputFile);
 
                             // 判断是否要操作字节码
+                            String name = file.getName();
+                            if (name.equals("MainActivity.class")) {
 
-                            try {
-                                FileUtils.copyFile(file, outFile);
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                                //对class文件进行读取与解析
+                                ClassReader classReader = new ClassReader(FileUtil.getBytesByFile(file.getPath()));
+                                //对class文件的写入
+                                ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS);
+                                //对class文件的写入
+                                MainActivityVisitor mainActivityVisitor =
+                                    new MainActivityVisitor(Opcodes.ASM6, (ClassVisitor) classWriter);
+                                //依次调用 ClassVisitor接口的各个方法
+                                classReader.accept(mainActivityVisitor, ClassReader.EXPAND_FRAMES);
+                                //toByteArray方法会将最终修改的字节码以 byte 数组形式返回。
+                                byte[] bytes = classWriter.toByteArray();
+
+                                FileOutputStream outputStream = null;
+                                try {
+                                    outputStream = new FileOutputStream(outFile.getAbsolutePath());
+                                    outputStream.write(bytes);
+                                    outputStream.close();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                try {
+                                    FileUtils.copyFile(file, outFile);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
                     });
@@ -150,15 +198,20 @@ public class ASMTransform extends Transform {
         String outRootPath = outRootPathFile.getAbsolutePath();
         String outFilePath = targetRootPath.replace(targetFilePath, outRootPath);
         File outFilePathFile = new File(outFilePath);
-        outFilePathFile.mkdirs();
-        if (!outFilePathFile.exists()) {
-            try {
-                outFilePathFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+        new File(getDirectory(outFilePathFile)).mkdirs();
+
+        try {
+            outFilePathFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return outFilePathFile;
+    }
+
+    private String getDirectory(File file) {
+        String name = file.getName();
+        return file.getAbsolutePath().replace(name, "");
     }
 
     // 获得目录下所有的子文件
