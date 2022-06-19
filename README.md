@@ -1,8 +1,6 @@
 **该工程补充说明
 
-该工程包括了APT（运行时编译）、SPI（服务提供方接口）、Transform、ASM
-
-编写于20191012 
+该工程包括了APT（运行时编译）、SPI（服务提供方接口）、Transform、ASM、Aspectj
 
 1、Gradle的兼容性bug 参考
 [https://blog.csdn.net/allenli0413/article/details/90602402]()
@@ -58,3 +56,80 @@ AutoService 主要用于生成META-INF.services下的文件
 7、ASM [https://asm.ow2.io/]()
 
 生成ASM代码插入代码 工具类 ASM Bytecode Viewer，注意有个坑，会提示找不到tools.jar，解决方案就直接去javac目录下，对应的class文件操作
+
+8、AspectJ（app1目录下）
+
+### 通配符：
+
+* 代表任意数量的字符
+
+.. 代表包结构下，任意子包数量；参数下，任意参数
+
++ 继承关系
+
+例子：
+```
+    // MainActivity(继承BaseActivity)
+
+    @Pointcut("execution(* android.com.aspectj.MainActivity.onCreate(..))")
+    //    @Pointcut("execution(* *..MainActivity.onCreate(..))")
+    //    @Pointcut("execution(* *.*.*.MainActivity.onCreate(..))")
+    //    @Pointcut("execution(* android.com.aspectj.BaseActivity+.onCreate(..))")
+    public void activityOnCreatePointcut() {
+
+    }
+```
+
+### call和execution
+
+#### call
+
+是在调用处插入代码
+
+```
+public class Activity1 extends BaseActivity {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // 在这里插入
+        new TextAspectjCall().call();
+    }
+}
+```
+
+#### execution
+
+在对应的方法处插入方法
+
+```
+public class TextAspectjCall {
+
+    public void call() {
+        // 在这里插入
+    }
+}
+```
+
+### within 和 whitincode
+
+#### whitin 指定某个类 配合execution 使用
+
+```
+@Pointcut("execution(* android.com.aspectj.BaseActivity+.onCreate(..)) && within(android.com.aspectj.MainActivity)")
+```
+
+在所有继承BaseActivity中指定MainActivity，如果想排除即用 !(备注：可能该库仅支持&& 不支持||)
+
+```
+@Pointcut("execution(* android.com.aspectj.BaseActivity+.onCreate(..)) && !within(android.com.aspectj.MainActivity)")
+```
+
+#### whitincode 指定某个方法不插入 配合call 使用
+
+```
+@Pointcut("call(* android.com.aspectj.TextAspectjCall.call()) && withincode(* android.com.aspectj.MainActivity.onCreate(..))")
+```
+
+底层原理： transform
+
+除Around以外，均为在相关位置插入代码，Around在相关类，新建一个新的方法（注意class直接拉入AS不展示该方法）
