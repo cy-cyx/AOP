@@ -13,12 +13,12 @@ import org.aspectj.lang.annotation.Pointcut;
 @Aspect
 public class Aspectj {
 
-    //    @Pointcut("execution(* android.com.aspectj.MainActivity.onCreate(..))")
+    //    @Pointcut("execution(* com.example.app1.MainActivity.onCreate(..))")
     //    @Pointcut("execution(* *..MainActivity.onCreate(..))")
     //    @Pointcut("execution(* *.*.*.MainActivity.onCreate(..))")
-    //    @Pointcut("execution(* android.com.aspectj.BaseActivity+.onCreate(..))")
-    //    @Pointcut("execution(* android.com.aspectj.BaseActivity+.onCreate(..)) && !within(android.com.aspectj.MainActivity)")
-    @Pointcut("execution(* android.com.aspectj.BaseActivity+.onCreate(..)) && within(android.com.aspectj.MainActivity)")
+    //    @Pointcut("execution(* com.example.app1.BaseActivity+.onCreate(..))")
+    //    @Pointcut("execution(* com.example.app1.BaseActivity+.onCreate(..)) && !within(com.example.app1.MainActivity)")
+    @Pointcut("execution(* com.example.app1.BaseActivity+.onCreate(..)) && within(com.example.app1.MainActivity)")
     public void activityOnCreatePointcut() {
 
     }
@@ -42,10 +42,10 @@ public class Aspectj {
 
     // 区分call和execution
 
-    //    @Pointcut("call(* android.com.aspectj.TextAspectjCall.call())")
-    //    @Pointcut("call(* android.com.aspectj.TextAspectjCall.call()) && !withincode(* android.com.aspectj.MainActivity.onCreate(..))")
+    //    @Pointcut("call(* com.example.app1.TextAspectjCall.call())")
+    //    @Pointcut("call(* com.example.app1.TextAspectjCall.call()) && !withincode(* com.example.app1.MainActivity.onCreate(..))")
     @Pointcut(
-        "call(* android.com.aspectj.TextAspectjCall.call()) && withincode(* android.com.aspectj.MainActivity.onCreate(..))")
+        "call(* com.example.app1.TextAspectjCall.call()) && withincode(* com.example.app1.MainActivity.onCreate(..))")
     public void callPointcut() {
 
     }
@@ -55,7 +55,7 @@ public class Aspectj {
         Log.d("xx", "callBefore（call）: " + joinPoint.getThis());
     }
 
-    @Pointcut("execution(* android.com.aspectj.TextAspectjCall.call())")
+    @Pointcut("execution(* com.example.app1.TextAspectjCall.call())")
     public void callPointcut1() {
 
     }
@@ -66,7 +66,7 @@ public class Aspectj {
     }
 
     // 带返回值的
-    @Pointcut("call(* android.com.aspectj.TextAspectjCall.callWithReturn())")
+    @Pointcut("call(* com.example.app1.TextAspectjCall.callWithReturn())")
     public void callWithReturn() {
 
     }
