@@ -57,6 +57,8 @@ AutoService 主要用于生成META-INF.services下的文件
 
 生成ASM代码插入代码 工具类 ASM Bytecode Viewer，注意有个坑，会提示找不到tools.jar，解决方案就直接去javac目录下，对应的class文件操作
 
+MainActivityVisitor，MainActivityOnCreateAdapter 代码实现插入代码
+
 8、AspectJ（app1目录下）
 
 ### 通配符：
