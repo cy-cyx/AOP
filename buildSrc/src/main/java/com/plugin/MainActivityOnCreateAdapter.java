@@ -47,14 +47,8 @@ public class MainActivityOnCreateAdapter extends MethodVisitor {
         // 自己塞入个return
         mv.visitInsn(Opcodes.RETURN);
 
-        // 保证最大栈够
-        int returnMaxStack = maxStack;
-        if (returnMaxStack < 2) {
-            returnMaxStack = 2;
-        }
-
-        super.visitMaxs(returnMaxStack, maxLocals);
-        System.out.println("maxStack：" + maxStack + "maxLocals:" + maxLocals);
+        // 设置了COMPUTE_FRAMES 自动计算帧
+        // super.visitMaxs(maxStack, maxLocals);
     }
 
     @Override

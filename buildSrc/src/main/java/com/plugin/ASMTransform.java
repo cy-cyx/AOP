@@ -160,7 +160,7 @@ public class ASMTransform extends Transform {
                                 //对class文件进行读取与解析
                                 ClassReader classReader = new ClassReader(FileUtil.getBytesByFile(file.getPath()));
                                 //对class文件的写入
-                                ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS);
+                                ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_FRAMES);
                                 //对class文件的写入
                                 MainActivityVisitor mainActivityVisitor =
                                     new MainActivityVisitor(Opcodes.ASM6, (ClassVisitor) classWriter);
