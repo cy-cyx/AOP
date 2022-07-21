@@ -134,7 +134,7 @@ public class ASMTransform extends Transform {
                                     FileOutputStream outputStream = new FileOutputStream(outFile.getAbsolutePath());
                                     outputStream.write(bytes);
                                     outputStream.close();
-                                }else {
+                                } else {
                                     FileUtils.copyFile(file, outFile);
                                 }
                                 break;

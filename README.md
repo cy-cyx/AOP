@@ -27,6 +27,23 @@ AutoService 主要用于生成META-INF.services下的文件
 
 *LogProcessor*
 
+增加参数配置
+```
+javaCompileOptions{
+     annotationProcessorOptions {
+        arguments = ["LOG_PRINT_ABLE": "true"]
+     }
+}
+
+Map<String, String> options = processingEnvironment.getOptions();
+String able = options.get(LOG_PRINT_ABLE);
+if (able == null) {
+    able = "false";
+}
+isAbleLogPrint = able.equals("true");
+
+```
+
 5、一个类似黄油刀的例子
 
 *ViewProcessor*

@@ -1,16 +1,15 @@
 package com.example.apt_process;
 
 import com.example.apt_lib.Log;
-import com.google.auto.service.AutoService;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
-import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
@@ -30,6 +29,8 @@ import javax.tools.Diagnostic;
 public class LogProcessor extends AbstractProcessor {
 
     private Messager mMessager;
+    private final String LOG_PRINT_ABLE = "LOG_PRINT_ABLE";
+    private boolean isAbleLogPrint = false;
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
@@ -42,20 +43,32 @@ public class LogProcessor extends AbstractProcessor {
     public synchronized void init(ProcessingEnvironment processingEnvironment) {
         super.init(processingEnvironment);
         mMessager = processingEnvironment.getMessager();
+
+        // options配置
+        Map<String, String> options = processingEnvironment.getOptions();
+        String able = options.get(LOG_PRINT_ABLE);
+        if (able == null) {
+            able = "false";
+        }
+        isAbleLogPrint = able.equals("true");
     }
 
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
-        mMessager.printMessage(Diagnostic.Kind.NOTE, "print class");
-        for (Element element : roundEnvironment.getElementsAnnotatedWith(Log.class)) {
-            mMessager.printMessage(Diagnostic.Kind.NOTE,"into for");
-            if (element instanceof TypeElement) {
-                logClass((TypeElement) element);
-            } else if (element instanceof ExecutableElement) {
-                logFun((ExecutableElement) element);
-            } else if (element instanceof VariableElement) {
-                logParameter((VariableElement) element);
+        if (isAbleLogPrint) {
+            mMessager.printMessage(Diagnostic.Kind.NOTE, "print class");
+            for (Element element : roundEnvironment.getElementsAnnotatedWith(Log.class)) {
+                mMessager.printMessage(Diagnostic.Kind.NOTE, "into for");
+                if (element instanceof TypeElement) {
+                    logClass((TypeElement) element);
+                } else if (element instanceof ExecutableElement) {
+                    logFun((ExecutableElement) element);
+                } else if (element instanceof VariableElement) {
+                    logParameter((VariableElement) element);
+                }
             }
+        } else {
+            mMessager.printMessage(Diagnostic.Kind.NOTE, "log print enable");
         }
         return false;
     }

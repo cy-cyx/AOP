@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.plugin'
 
+println("start gradle")
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
@@ -11,6 +13,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["LOG_PRINT_ABLE": "true"]
+            }
+        }
     }
     buildTypes {
         release {
@@ -26,6 +34,10 @@ android {
 
 tasks.withType(JavaCompile) {
     options.encoding = "GBK"
+}
+
+asmConfig {
+    useAsm = true
 }
 
 dependencies {
