@@ -44,6 +44,8 @@ isAbleLogPrint = able.equals("true");
 
 ```
 
+区分annotationProcessor和kapt的使用
+
 5、一个类似黄油刀的例子
 
 *ViewProcessor*
